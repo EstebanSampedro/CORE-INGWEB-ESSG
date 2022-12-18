@@ -30,4 +30,13 @@ yarn start
 
 ### Paso 4: Inicializar Client y Admin  
 - El usuario tendrá que inicializar el resto de servicios (client y admin) para poder acceder a todas las funcionalidades del aplicativo. **CADA INICIALIZACIÓN EN DIFERENTE TERMINAL**
+```bash
+cd client
+yarn start
+```
+
+```bash
+cd admin
+yarn start
+```
 #### Desarrollado por: Esteban Sampedro
