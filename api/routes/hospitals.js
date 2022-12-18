@@ -26,6 +26,9 @@ router.get("/countByType", countByType);
 router.get("/room/:id", getHospitalRooms);
 
 
+/*  RETO ING WEB PROGRESO 2 */
+//Reporte de: Entre rango de fechas preestablecidas generar un metodo de Reporte por cada hospital de cuales han sido los rooms que mas se han reservado
+//y que se ordene por mayor room reservado
 router.get("/report", async (req, res, next) => {
   try {
     const startDate = new Date(req.query.startDate);
@@ -71,13 +74,14 @@ router.get("/report", async (req, res, next) => {
 });
 
 
+//Reporte de: Entre rango de fechas preestablecidas generar un metodo de reporte de los hospitales con mayores roooms reservados en total y que se ordene
+//por mayor
 
 router.get("/report2", async (req, res, next) => {
   try {
     const startDate = new Date(req.query.startDate);
     const endDate = new Date(req.query.endDate);
 
-    // Query the Room model to find all rooms booked between the given dates
     const rooms = await Room.find({
       "roomNumbers.unavailableDates": {
         $gte: startDate,
@@ -108,7 +112,6 @@ router.get("/report2", async (req, res, next) => {
       return acc;
     }, {});
 
-    // Sort the data by hospital and room number
     const sortedReport = Object.entries(report).map(([hospital, data]) => {
       const sortedData = Object.entries(data)
         .sort((a, b) => b[1] - a[1])
@@ -121,6 +124,50 @@ router.get("/report2", async (req, res, next) => {
     next(err);
   }
 });
+
+
+
+router.get("/reportFin", async (req, res, next) => {
+  try {
+    const startDate = new Date(req.query.startDate);
+    const endDate = new Date(req.query.endDate);
+   
+    const rooms = await Room.find({
+      "roomNumbers.unavailableDates": {
+        $gte: startDate,
+        $lt: endDate,
+      },
+    });
+
+    
+    const report = rooms.reduce((acc, room) => {
+      const hospital = room.title;
+      const count = room.roomNumbers.reduce((acc, roomNumber) => {
+        return acc + roomNumber.unavailableDates.reduce((acc, date) => {
+          if (date >= startDate && date < endDate) {
+            acc++;
+          }
+          return acc;
+        }, 0);
+      }, 0);
+      if (hospital in acc) {
+        acc[hospital] += count;
+      } else 
+      {
+        acc[hospital] = count;
+      }
+      return acc;
+    }, {});
+
+    const sortedReport = Object.entries(report).sort((a, b) => b[1] - a[1]);
+
+    res.status(200).json(sortedReport.map(([hospital, count]) => ({ hospital, count })));
+  } catch (err) {
+    next(err);
+  }
+});
+
+
 
 
 export default router;
