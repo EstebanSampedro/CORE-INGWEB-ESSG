@@ -52,13 +52,13 @@
   background-color: white;
   border: 3px solid #febb02;
   display: flex;
-  align-items: center;
+  align-items:center;
   justify-content: space-around;
   padding: 10px 0px;
   border-radius: 5px;
   position: absolute;
   bottom: -25px;
-  width: 100%;
+  width: 70%;
   max-width: 1024px;
 }
 
@@ -69,7 +69,7 @@
 .headerSearchItem {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 50px;
 }
 
 .headerSearchInput {

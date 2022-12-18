@@ -1,5 +1,5 @@
 import express from "express";
-import { createRoom, deleteRoom, getRoom, getRooms, updateRoom, updateRoomAvailability,} from "../controllers/room.js";
+import { createRoom, deleteRoom, getRoom, getRooms, updateRoom, updateRoomAvailability, countByDateRoom, countByReserva, getMostReservedRooms} from "../controllers/room.js";
 import { verifyAdmin } from "../utils/verifyToken.js";
 
 const router = express.Router();
@@ -18,4 +18,17 @@ router.get("/:id", getRoom);
 
 router.get("/", getRooms);
 
+
+router.get("/countByDateRoom", countByDateRoom);
+router.get("/countByReserva", countByReserva);
+
+//Prueba Final
+
+
+
+router.get("/getMostReservedRooms", getMostReservedRooms);
+
+
+
 export default router;
+
