@@ -22,7 +22,7 @@
 npm install --global yarn 
 ```
 ### Paso 3: Inicializar API
-- El usuario tendrá que inicializar el proyecto mediante una terminal abierta con los sigueintes comandos:
+- El usuario tendrá que inicializar el proyecto mediante una terminal abierta con los siguientes comandos:
 ```bash
 cd api
 yarn start
