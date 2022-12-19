@@ -3,6 +3,9 @@
 
 **Repositorio de la aplicación**
 
+**Link proyecto deployado: 
+FrontEnd: https://frontend-ingweb-essgg.onrender.com/
+API: https://backend-ingweb-essgg2.onrender.com/api**
 
 ## Herramientas utilizadas
 - React.js (FrontEnd)
